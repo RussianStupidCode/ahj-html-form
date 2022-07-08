@@ -1,5 +1,4 @@
 import TableRow from './tableRow';
-import { getContolType, CONTROL_TYPES } from './control_types';
 
 export default class Table {
   constructor() {
@@ -14,29 +13,6 @@ export default class Table {
     this.body = document.createElement('tbody');
 
     this.el.insertAdjacentElement('beforeEnd', this.body);
-
-    this.setListeners();
-  }
-
-  setListeners() {
-    this.body.addEventListener('click', (event) => {
-      const { target } = event;
-
-      const control = target.closest('.control');
-
-      if (!control) {
-        return;
-      }
-
-      const controlType = getContolType(control);
-
-      const item = control.closest('.crm-row');
-      const itemId = item.dataset.id;
-
-      if (controlType === CONTROL_TYPES.delete) {
-        this.deleteItem(itemId);
-      }
-    });
   }
 
   deleteItem(id) {

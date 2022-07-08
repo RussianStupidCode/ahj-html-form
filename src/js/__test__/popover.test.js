@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Popover from '../popover';
+import Popover from '../popover/popover';
 
 test('popover create test', () => {
   const container = document.createElement('div');

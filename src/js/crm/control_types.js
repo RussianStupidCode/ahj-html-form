@@ -13,6 +13,10 @@ export function getContolType(controlEl) {
     return CONTROL_TYPES.update;
   }
 
+  if (controlEl.classList.contains('create')) {
+    return CONTROL_TYPES.create;
+  }
+
   return undefined;
 }
 

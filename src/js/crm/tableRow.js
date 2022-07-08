@@ -45,7 +45,7 @@ export default class TableRow {
   }
 
   set price(price) {
-    this.titleElement.textContent = priceFormat(price);
+    this.priceElement.textContent = priceFormat(price);
   }
 
   remove() {

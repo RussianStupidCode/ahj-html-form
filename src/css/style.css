@@ -73,6 +73,10 @@ img {
   left: 0;
 }
 
+.crud-form input {
+  width: 90%;
+}
+
 @media screen and (orientation: portrait) {
   .crm {
     font-size: 2vh;
@@ -81,6 +85,10 @@ img {
   .header-title {
     font-size: 3vh;
     font-weight: bold;
+  }
+
+  .crud-form input {
+    font-size: 2vh;
   }
 }
 
@@ -93,6 +101,10 @@ img {
     font-weight: bold;
     font-size: 3vw;
   }
+
+  .crud-form input {
+    font-size: 1.5vw;
+  }
 }
 
 @media screen and (orientation: portrait) {
@@ -100,6 +112,14 @@ img {
     position: relative;
     width: 3vh;
     height: 3vh;
+  }
+
+  .crud-form {
+    font-size: 3vh;
+  }
+
+  .btn.crud-control {
+    font-size: 2vh;
   }
 }
 
@@ -109,6 +129,19 @@ img {
     width: 2vw;
     height: 2vw;
   }
+
+  .crud-form {
+    font-size: 2vw;
+  }
+
+  .btn.crud-control {
+    font-size: 2vw;
+  }
+}
+
+.crud-form {
+  padding: 2vw;
+  background-color: white;
 }
 
 .crm-header {
@@ -119,4 +152,29 @@ img {
 .crm-body {
   height: 90%;
   width: 100%;
+}
+
+.crud-form {
+  z-index: 1000;
+  margin: 0;
+  width: 70vw;
+  position: absolute;
+  left: calc(50% - 35vw);
+  top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.nonactive-filter {
+  position: absolute;
+  content: '';
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.5;
 }
