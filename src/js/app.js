@@ -4,9 +4,16 @@ import not$ from './popover/notJQ';
 const controls = document.querySelector('.controls');
 const field = document.querySelector('.field');
 
-function createControlButton(text, callback) {
+function createControlButton(text, uniqueClass, callback) {
   const btn = document.createElement('button');
-  btn.classList.add('btn', 'bg-primary', 'text-white', 'm-2', 'p-2');
+  btn.classList.add(
+    'btn',
+    'bg-primary',
+    'text-white',
+    'm-2',
+    'p-2',
+    uniqueClass
+  );
   btn.textContent = text;
 
   btn.addEventListener('click', (event) => {
@@ -17,7 +24,7 @@ function createControlButton(text, callback) {
   controls.insertAdjacentElement('beforeEnd', btn);
 }
 
-createControlButton('popover (#1)', () => {
+createControlButton('popover (#1)', 'popover-start-button', () => {
   const btnEl = document.createElement('button');
   btnEl.classList.add('btn', 'bg-primary', 'text-white');
   btnEl.textContent = 'Click Me';
@@ -31,7 +38,7 @@ createControlButton('popover (#1)', () => {
   });
 });
 
-createControlButton('CRM (#2)', () => {
+createControlButton('CRM (#2)', 'crm-start-button', () => {
   field.classList.remove('field-center');
 
   const crm = new CRM();

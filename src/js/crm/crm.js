@@ -68,7 +68,7 @@ export default class CRM {
     const titleInput = new Input('title', 'Название', 'text', titleValidate);
     this.crudModal.addInput('title', titleInput);
 
-    const priceInput = new Input('title', 'Стоимость', 'text', priceValidate);
+    const priceInput = new Input('price', 'Стоимость', 'text', priceValidate);
     this.crudModal.addInput('price', priceInput);
   }
 
