@@ -51,9 +51,72 @@ body {
 }
 
 .field {
+  width: 100%;
+  height: 100%;
+}
+
+.field-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+img {
   width: 100%;
   height: 100%;
+}
+
+.control-img {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (orientation: portrait) {
+  .crm {
+    font-size: 2vh;
+  }
+
+  .header-title {
+    font-size: 3vh;
+    font-weight: bold;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .crm {
+    font-size: 2vw;
+  }
+
+  .header-title {
+    font-weight: bold;
+    font-size: 3vw;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .btn.control {
+    position: relative;
+    width: 3vh;
+    height: 3vh;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .btn.control {
+    position: relative;
+    width: 2vw;
+    height: 2vw;
+  }
+}
+
+.crm-header {
+  height: 10%;
+  width: 70%;
+}
+
+.crm-body {
+  height: 90%;
+  width: 100%;
 }

@@ -1,5 +1,5 @@
 export default class Popover {
-  /* у одного элемента может быть только 1 popover*/
+  /* у одного элемента может быть только 1 popover */
 
   static parents = new WeakSet();
 
@@ -49,9 +49,8 @@ export default class Popover {
     });
 
     document.body.addEventListener('click', (event) => {
-      if (event.target !== this.el && event.target != this.parentEl) {
+      if (!event.target.closest('.popover') && event.target !== this.parentEl) {
         this.close();
-        return;
       }
     });
   }
@@ -79,6 +78,10 @@ export default class Popover {
 
   get text() {
     return this.textEl.textContent;
+  }
+
+  get isOpen() {
+    return !this.el.classList.contains('d-none');
   }
 
   move() {

@@ -13,7 +13,8 @@ class NotJQ {
   }
 
   popover(title, text) {
-    new Popover(title, text, this.el);
+    const popover = new Popover(title, text, this.el);
+    return popover;
   }
 
   addEventListener(eventString, callback) {

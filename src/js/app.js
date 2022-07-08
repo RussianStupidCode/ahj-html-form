@@ -1,4 +1,5 @@
-import not$ from './notJQ';
+import CRM from './crm/crm';
+import not$ from './popover/notJQ';
 
 const controls = document.querySelector('.controls');
 const field = document.querySelector('.field');
@@ -22,9 +23,17 @@ createControlButton('popover (#1)', () => {
   btnEl.textContent = 'Click Me';
 
   field.append(btnEl);
+  field.classList.add('field-center');
 
   const btn = not$(btnEl);
   btn.addEventListener('click', () => {
     btn.popover('Popover title', 'some text');
   });
+});
+
+createControlButton('CRM (#2)', () => {
+  field.classList.remove('field-center');
+
+  const crm = new CRM();
+  crm.bindToDOM(field);
 });
