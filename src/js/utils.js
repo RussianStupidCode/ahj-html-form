@@ -1,6 +1,12 @@
+import moment from 'moment';
+
+export function priceToNumber(price) {
+  return Number(String(price).replace(/\s+/g, '').replace(/,/, '.'));
+}
+
 export function priceFormat(price) {
-  const priceNumber = Number(price.replace(' ', ''));
-  return priceNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const priceNumber = priceToNumber(price);
+  return Intl.NumberFormat('ru-RU').format(priceNumber);
 }
 
 export function titleValidate(title) {
@@ -25,7 +31,7 @@ export function priceValidate(price) {
     isValid: true,
   };
 
-  const priceNumber = Number(price.replace(/[ ,]/, ''));
+  const priceNumber = priceToNumber(price);
 
   if (Object.is(NaN, priceNumber)) {
     result.isValid = false;
@@ -38,4 +44,17 @@ export function priceValidate(price) {
   }
 
   return result;
+}
+
+export function getWeekCountInMonth(momentDate) {
+  const startMonthWeek = moment(momentDate).startOf('month').isoWeek();
+  const endMonthWeek = moment(momentDate).endOf('month').isoWeek();
+  return endMonthWeek - startMonthWeek + 1;
+}
+
+export function getWeekNumberInMonth(momentDate) {
+  const weekInYear = momentDate.isoWeek();
+  const startMonth = moment(momentDate).startOf('month');
+
+  return weekInYear - startMonth.isoWeek();
 }

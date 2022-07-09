@@ -1,5 +1,10 @@
+import moment from 'moment';
 import CRM from './crm/crm';
 import not$ from './popover/notJQ';
+import WebDay from './dateWidget/webDay';
+import WebCalendar from './dateWidget/webCalendar';
+
+moment.locale('ru');
 
 const controls = document.querySelector('.controls');
 const field = document.querySelector('.field');
@@ -43,4 +48,15 @@ createControlButton('CRM (#2)', 'crm-start-button', () => {
 
   const crm = new CRM();
   crm.bindToDOM(field);
+});
+
+createControlButton('date widget (#3)', 'date-widget-start-button', () => {
+  field.classList.add('field-center');
+
+  const calendar = new WebCalendar(moment(), WebDay, moment());
+
+  calendar.bindToDOM(field);
+  document.body.addEventListener('click', () => {
+    calendar.open();
+  });
 });

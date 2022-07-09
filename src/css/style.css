@@ -77,6 +77,11 @@ img {
   width: 90%;
 }
 
+.calendar-control {
+  position: relative;
+  margin: 0 5%;
+}
+
 @media screen and (orientation: portrait) {
   .crm {
     font-size: 2vh;
@@ -89,6 +94,15 @@ img {
 
   .crud-form input {
     font-size: 2vh;
+  }
+  /*
+  .calendar {
+    width: 40vh;
+  }
+*/
+  .calendar-control {
+    width: 3vh;
+    height: 3vh;
   }
 }
 
@@ -121,11 +135,20 @@ img {
   .btn.crud-control {
     font-size: 2vh;
   }
+
+  .badge.week-day {
+    font-size: 2vh;
+  }
 }
 
 @media screen and (orientation: landscape) {
   .btn.control {
     position: relative;
+    width: 2vw;
+    height: 2vw;
+  }
+
+  .calendar-control {
     width: 2vw;
     height: 2vw;
   }
@@ -136,6 +159,10 @@ img {
 
   .btn.crud-control {
     font-size: 2vw;
+  }
+
+  .badge.week-day {
+    font-size: 1vw;
   }
 }
 
@@ -177,4 +204,30 @@ img {
   bottom: 0;
   background-color: black;
   opacity: 0.5;
+}
+
+.calendar {
+  padding: 1%;
+}
+
+.calendar-header {
+  text-transform: capitalize;
+  font-size: 1.1em;
+  width: 100%;
+  height: 10%;
+  margin: 0;
+  padding: 3%;
+}
+
+.badge.week-day {
+  width: 100%;
+  color: black;
+  margin: 0;
+}
+
+table.calendar-table td,
+table.calendar-table th {
+  padding: 1%;
+  max-width: 8vw;
+  max-height: 8vw;
 }

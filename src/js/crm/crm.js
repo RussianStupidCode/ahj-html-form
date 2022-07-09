@@ -1,5 +1,5 @@
 import CREATE_IMG from '../../img/create.png';
-import { priceValidate, titleValidate } from '../utils';
+import { priceFormat, priceValidate, titleValidate } from '../utils';
 import { CONTROL_TYPES, getContolType } from './control_types';
 import CRUDModal from './crudModal';
 import Input from './input';
@@ -97,7 +97,7 @@ export default class CRM {
         const item = this.table.getItem(this.lastSelectedItemId);
 
         this.crudModal.setInput('title', item.title);
-        this.crudModal.setInput('price', item.price);
+        this.crudModal.setInput('price', priceFormat(item.price));
 
         this.crudModal.open(
           'Вы действительно хотите удалить?',
@@ -112,7 +112,7 @@ export default class CRM {
         const item = this.table.getItem(this.lastSelectedItemId);
 
         this.crudModal.setInput('title', item.title);
-        this.crudModal.setInput('price', item.price);
+        this.crudModal.setInput('price', priceFormat(item.price));
 
         this.crudModal.open(
           `Обновление товара ${item.title}`,

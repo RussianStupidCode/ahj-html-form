@@ -1,6 +1,6 @@
 import UPDATE_IMG from '../../img/pencil.png';
 import DELETE_IMG from '../../img/recycle.png';
-import { priceFormat } from '../utils';
+import { priceFormat, priceToNumber } from '../utils';
 
 export default class TableRow {
   constructor(id, title, price) {
@@ -41,7 +41,7 @@ export default class TableRow {
   }
 
   get price() {
-    return this.priceElement.textContent;
+    return priceToNumber(this.priceElement.textContent);
   }
 
   set price(price) {
