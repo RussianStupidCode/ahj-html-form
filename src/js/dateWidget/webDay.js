@@ -6,8 +6,14 @@ export default class WebDay extends Day {
 
     this.el = document.createElement('button');
     this.el.textContent = momentDate.date();
-    this.el.classList.add('btn', 'p-0', 'w-100');
-    this.el.classList.add('border', 'border-2', 'border-white');
+    this.el.classList.add(
+      'btn',
+      'p-0',
+      'w-100',
+      'calendar-cell',
+      'text-black-50'
+    );
+    this.el.classList.add('border', 'border-2');
 
     this.deactivate();
   }
@@ -21,7 +27,6 @@ export default class WebDay extends Day {
       return;
     }
 
-    this.el.classList.remove('border-white');
     this.el.classList.add('border-primary');
   }
 
@@ -30,22 +35,17 @@ export default class WebDay extends Day {
       return;
     }
 
-    this.el.classList.add('border-white');
     this.el.classList.remove('border-primary');
   }
 
   fix() {
-    if (!this.active) {
-      return;
-    }
     this.fixed = true;
-    this.el.classList.remove('border-white');
-    this.el.classList.add('border', 'border-2', 'border-info');
+    this.el.classList.add('border', 'border-2', 'border-warning');
   }
 
   unfix() {
     this.fixed = false;
-    this.el.classList.remove('border', 'border-2', 'border-info');
+    this.el.classList.remove('border', 'border-2', 'border-warning');
   }
 
   select() {
@@ -57,7 +57,7 @@ export default class WebDay extends Day {
   }
 
   unselect() {
-    this.el.classList.remove('bg-primary', 'text-white');
+    this.el.classList.remove('bg-primary');
 
     this.selected = false;
   }
@@ -65,10 +65,12 @@ export default class WebDay extends Day {
   activate() {
     this.active = true;
     this.el.classList.remove('text-black-50');
+    this.el.classList.add('active');
   }
 
   deactivate() {
     this.active = false;
     this.el.classList.add('text-black-50');
+    this.el.classList.remove('active');
   }
 }

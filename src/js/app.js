@@ -1,8 +1,7 @@
 import moment from 'moment';
 import CRM from './crm/crm';
+import InputDateWidget from './dateWidget/inputDateWidget';
 import not$ from './popover/notJQ';
-import WebDay from './dateWidget/webDay';
-import WebCalendar from './dateWidget/webCalendar';
 
 moment.locale('ru');
 
@@ -52,11 +51,24 @@ createControlButton('CRM (#2)', 'crm-start-button', () => {
 
 createControlButton('date widget (#3)', 'date-widget-start-button', () => {
   field.classList.add('field-center');
+  field.innerHTML = `
+  <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btn-check-outlined">Туда и обратно</label>
+  <div class="w-50 d-flex flex-column justify-content-center align-items-center"></div>
+  `;
 
-  const calendar = new WebCalendar(moment(), WebDay, moment());
+  const checkbox = field.querySelector('label.btn');
+  const innput = field.querySelector('input[type="checkbox"]');
 
-  calendar.bindToDOM(field);
-  document.body.addEventListener('click', () => {
-    calendar.open();
+  const container = field.querySelector('div');
+
+  const inputDate = new InputDateWidget();
+
+  checkbox.addEventListener('click', (event) => {
+    event.preventDefault();
+    innput.checked = !innput.checked;
+    inputDate.backward = innput.checked;
   });
+
+  inputDate.bindToDOM(container);
 });

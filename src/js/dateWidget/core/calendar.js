@@ -4,13 +4,20 @@ import { getWeekCountInMonth } from '../../utils';
 const DAYS_IN_WEEK = 7;
 
 export default class Calendar {
-  constructor(momentDate, DayClass, startActiveDate) {
+  constructor(
+    momentDate,
+    DayClass,
+    currentDate,
+    startActiveDate = currentDate
+  ) {
     this.startActiveDate = moment(startActiveDate).startOf('day');
     this.momentDate = null;
     this.month = null;
     this.year = null;
 
     this.currentSelectDay = null;
+
+    this.currentDate = moment(currentDate).startOf('day');
 
     this.DayClass = DayClass;
 
@@ -69,7 +76,7 @@ export default class Calendar {
       day.activate();
     }
 
-    if (day.moment.isSame(this.startActiveDate)) {
+    if (day.moment.isSame(this.currentDate)) {
       day.fix();
     }
   }
@@ -80,6 +87,14 @@ export default class Calendar {
 
   get monthName() {
     return this.momentDate.format('MMMM');
+  }
+
+  setStartActiveDate(startActiveDate) {
+    this.startActiveDate = startActiveDate;
+
+    this.days.forEach((day) => {
+      this.changeDayState(day);
+    });
   }
 
   addMonth(count) {

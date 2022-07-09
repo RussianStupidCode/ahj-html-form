@@ -19,8 +19,10 @@ export default class WebCalendar extends Calendar {
     return td;
   }
 
-  constructor(momentDate, DayClass, startActiveDate) {
+  constructor(momentDate, DayClass, startActiveDate, selectCellCallback) {
     super(momentDate, DayClass, startActiveDate);
+
+    this.selectCellCallback = selectCellCallback;
 
     this.el = document.createElement('div');
     this.el.classList.add(
@@ -52,6 +54,7 @@ export default class WebCalendar extends Calendar {
     this.renderCalendar();
 
     this.setListeners();
+    this.close();
   }
 
   renderCalendar() {
@@ -59,6 +62,11 @@ export default class WebCalendar extends Calendar {
     this.table = this.createCalendarTable();
     this.title.textContent = `${this.monthName} ${this.year}`;
     this.el.insertAdjacentElement('beforeend', this.table);
+    this.previousMonthButton.classList.remove('grayscale');
+
+    if (this.isCurrentMonth()) {
+      this.previousMonthButton.classList.add('grayscale');
+    }
   }
 
   createCalendarTable() {
@@ -68,13 +76,13 @@ export default class WebCalendar extends Calendar {
     table.innerHTML = `
     <thead class="w-100">
         <tr>
-          <th class="p-0"><span class="badge week-day w-100 m-0">${'Пн'}</th>
-          <th class="p-0"><span class="badge week-day w-100 m-0">${'Вт'}</th>
-          <th class="p-0"><span class="badge week-day w-100 m-0">${'Ср'}</th>
-          <th class="p-0"><span class="badge week-day w-100 m-0">${'Чт'}</th>
-          <th class="p-0"><span class="badge week-day w-100 m-0">${'Пт'}</th>
-          <th class="p-0"><span class="badge week-day w-100 m-0">${'Сб'}</th>
-          <th class="p-0"><span class="badge week-day w-100 m-0">${'Вс'}</th>
+          <th class="p-0"><span class="badge week-day w-100 m-0 p-0">${'Пн'}</th>
+          <th class="p-0"><span class="badge week-day w-100 m-0 p-0">${'Вт'}</th>
+          <th class="p-0"><span class="badge week-day w-100 m-0 p-0">${'Ср'}</th>
+          <th class="p-0"><span class="badge week-day w-100 m-0 p-0">${'Чт'}</th>
+          <th class="p-0"><span class="badge week-day w-100 m-0 p-0">${'Пт'}</th>
+          <th class="p-0"><span class="badge week-day w-100 m-0 p-0">${'Сб'}</th>
+          <th class="p-0"><span class="badge week-day w-100 m-0 p-0">${'Вс'}</th>
         </tr>
       </thead>`;
 
@@ -100,13 +108,6 @@ export default class WebCalendar extends Calendar {
   }
 
   setListeners() {
-    document.body.addEventListener('click', (event) => {
-      const { target } = event;
-      if (!target.closest('.calendar')) {
-        this.close();
-      }
-    });
-
     this.el.addEventListener('click', (event) => {
       const { target } = event;
 
@@ -114,6 +115,10 @@ export default class WebCalendar extends Calendar {
 
       if (cell && cell.dataset.day) {
         this.select(cell.dataset.day);
+
+        if (this.currentSelectDay) {
+          this.selectCellCallback(this.currentSelectDay);
+        }
       }
     });
 
@@ -157,13 +162,17 @@ export default class WebCalendar extends Calendar {
 
       const btn = target.closest('.prev-month');
 
-      if (!btn) {
+      if (!btn || this.isCurrentMonth()) {
         return;
       }
 
       this.addMonth(-1);
       this.renderCalendar();
     });
+  }
+
+  isCurrentMonth() {
+    return this.momentDate.isSame(moment().startOf('month'));
   }
 
   select(dayIndex) {
@@ -189,6 +198,11 @@ export default class WebCalendar extends Calendar {
     this.changeMomentDate(moment());
     this.renderCalendar();
     this.el.classList.remove('d-none');
+  }
+
+  move(top, left) {
+    this.el.style.top = `${top}px`;
+    this.el.style.left = `${left}px`;
   }
 
   bindToDOM(parentEl) {

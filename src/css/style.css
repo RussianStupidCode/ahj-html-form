@@ -59,6 +59,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 img {
@@ -139,6 +140,17 @@ img {
   .badge.week-day {
     font-size: 2vh;
   }
+
+  .input-date {
+    font-size: 2.4vh;
+  }
+
+  table.calendar-table td,
+  table.calendar-table th {
+    padding: 0.5%;
+    min-width: 3.5vh;
+    min-height: 3.5vh;
+  }
 }
 
 @media screen and (orientation: landscape) {
@@ -146,6 +158,10 @@ img {
     position: relative;
     width: 2vw;
     height: 2vw;
+  }
+
+  .input-date {
+    font-size: 1.2vw;
   }
 
   .calendar-control {
@@ -163,6 +179,15 @@ img {
 
   .badge.week-day {
     font-size: 1vw;
+  }
+
+  table.calendar-table td,
+  table.calendar-table th {
+    padding: 0.5%;
+    max-width: 8vw;
+    max-height: 8vw;
+    min-width: 2.5vw;
+    min-height: 2.5vw;
   }
 }
 
@@ -207,7 +232,10 @@ img {
 }
 
 .calendar {
-  padding: 1%;
+  position: absolute;
+  z-index: 10;
+  border: 2px solid #555;
+  background-color: lightseagreen;
 }
 
 .calendar-header {
@@ -225,9 +253,23 @@ img {
   margin: 0;
 }
 
-table.calendar-table td,
-table.calendar-table th {
-  padding: 1%;
-  max-width: 8vw;
-  max-height: 8vw;
+.grayscale {
+  filter: grayscale(1);
+}
+
+.input-date-block {
+  position: relative;
+}
+
+.input-date:focus {
+  outline: none;
+  border: none;
+}
+
+.calendar-cell.active {
+  font-weight: bold;
+}
+
+.input-date-widget {
+  width: 80%;
 }
