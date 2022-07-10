@@ -13,8 +13,26 @@ export default class InputDateWidget {
 
     this.isBackward = false;
 
-    this.noBackwardInput = new InputDate('Дата:');
-    this.noBackwardInput.bindToDOM(this.el);
+    this.noBackwardInput = new InputDate('Дата:', (day) => {
+      this.backwardInput.setStartAtiveDate(day.moment);
+
+      if (this.backwardInput.value < this.noBackwardInput.value) {
+        this.backwardInput.reset();
+      }
+      this.departureInput.selectDate(day);
+    });
+
+    this.backwardInput = new InputDate('Обратно:');
+
+    this.departureInput = new InputDate('Туда:', (day) => {
+      this.backwardInput.setStartAtiveDate(day.moment);
+
+      if (this.backwardInput.value < this.departureInput.value) {
+        this.backwardInput.reset();
+      }
+
+      this.noBackwardInput.selectDate(day);
+    });
 
     this.dateRangeInputBlock = document.createElement('div');
     this.dateRangeInputBlock.classList.add(
@@ -25,15 +43,7 @@ export default class InputDateWidget {
       'w-100'
     );
 
-    this.backwardInput = new InputDate('Обратно:');
-    this.departureInput = new InputDate('Туда:', (day) => {
-      this.backwardInput.setStartAtiveDate(day.moment);
-
-      if (this.backwardInput.value < this.departureInput.value) {
-        this.backwardInput.reset();
-      }
-    });
-
+    this.noBackwardInput.bindToDOM(this.el);
     this.departureInput.bindToDOM(this.dateRangeInputBlock);
     this.backwardInput.bindToDOM(this.dateRangeInputBlock);
 

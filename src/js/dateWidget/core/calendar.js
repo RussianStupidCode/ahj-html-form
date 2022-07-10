@@ -28,6 +28,13 @@ export default class Calendar {
   }
 
   changeMomentDate(newMomentDate) {
+    if (
+      this.momentDate &&
+      this.momentDate.isSame(moment(newMomentDate).startOf('month'))
+    ) {
+      return;
+    }
+
     this.currentSelectDay = null;
     this.momentDate = moment(newMomentDate).startOf('month');
     this.month = newMomentDate.date();
