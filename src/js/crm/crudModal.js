@@ -146,6 +146,10 @@ export default class CRUDModal {
     this.titleEl.textContent = title;
     this.el.classList.remove('d-none');
 
+    this.inputs.forEach((input) => {
+      input.hideError();
+    });
+
     if (controlType === CONTROL_TYPES.delete) {
       this.disableInputs();
     } else {
