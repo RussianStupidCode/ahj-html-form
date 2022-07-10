@@ -84,6 +84,10 @@ export default class InputDate {
     this.input.value = '';
   }
 
+  isOpen() {
+    return !this.el.classList.contains('d-none');
+  }
+
   close() {
     this.el.classList.add('d-none');
     this.calendar.close();

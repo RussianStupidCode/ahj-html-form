@@ -3,11 +3,11 @@ import { priceFormat, priceValidate, titleValidate } from '../utils';
 const PRICE_FORMAT_TEST_DATA = [
   {
     value: '1000',
-    expected: '1 000',
+    expected: Intl.NumberFormat('ru-RU').format(1000),
   },
   {
     value: '1 000',
-    expected: '1 000',
+    expected: Intl.NumberFormat('ru-RU').format(1000),
   },
   {
     value: '10',
@@ -20,7 +20,7 @@ const priceFormatHandler = test.each(PRICE_FORMAT_TEST_DATA);
 priceFormatHandler('test price format %s', ({ value, expected }) => {
   const actual = priceFormat(value);
 
-  expect(actual).toBe(expected);
+  expect(actual).toEqual(expected);
 });
 
 const TITLE_VALIDATE_TEST_DATA = [
