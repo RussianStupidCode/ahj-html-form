@@ -57,7 +57,7 @@ export default class WebDay extends Day {
   }
 
   unselect() {
-    this.el.classList.remove('bg-primary');
+    this.el.classList.remove('bg-primary', 'text-white');
 
     this.selected = false;
   }

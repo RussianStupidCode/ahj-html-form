@@ -13,14 +13,7 @@ export default class InputDateWidget {
 
     this.isBackward = false;
 
-    this.noBackwardInput = new InputDate('Дата:', (day) => {
-      this.backwardInput.setStartAtiveDate(day.moment);
-
-      if (this.backwardInput.value < this.noBackwardInput.value) {
-        this.backwardInput.reset();
-      }
-      this.departureInput.selectDate(day);
-    });
+    this.noBackwardInput = new InputDate('Дата:');
 
     this.backwardInput = new InputDate('Обратно:');
 
@@ -30,8 +23,6 @@ export default class InputDateWidget {
       if (this.backwardInput.value < this.departureInput.value) {
         this.backwardInput.reset();
       }
-
-      this.noBackwardInput.selectDate(day);
     });
 
     this.dateRangeInputBlock = document.createElement('div');

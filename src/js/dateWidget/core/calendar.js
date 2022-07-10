@@ -109,7 +109,7 @@ export default class Calendar {
       return;
     }
 
-    this.changeMomentDate(this.momentDate.add(count, 'months'));
+    this.changeMomentDate(moment(this.momentDate).add(count, 'months'));
   }
 
   get selectedDay() {
@@ -121,6 +121,6 @@ export default class Calendar {
       return;
     }
 
-    this.changeMomentDate(this.momentDate.add(count, 'years'));
+    this.changeMomentDate(moment(this.momentDate).add(count, 'years'));
   }
 }
